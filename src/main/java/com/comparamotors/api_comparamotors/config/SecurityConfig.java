@@ -48,10 +48,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authz -> authz
                         // Endpoints públicos
                         .requestMatchers("/api/login").permitAll()
-    
+
                         // Permitir acceso a Swagger sin autenticación
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
-    
+
                         // Permisos para User
                         .requestMatchers(HttpMethod.POST, "/api/users").hasAuthority("POST /users")
                         .requestMatchers(HttpMethod.PUT, "/api/users/{id}").hasAuthority("PUT /users/{id}")
@@ -62,7 +62,7 @@ public class SecurityConfig {
                         .hasAuthority("POST /users/{userId}/roles/{roleId}")
                         .requestMatchers(HttpMethod.DELETE, "/api/users/{userId}/roles/{roleId}")
                         .hasAuthority("DELETE /users/{userId}/roles/{roleId}")
-    
+
                         // Permisos para Permission
                         .requestMatchers(HttpMethod.POST, "/api/permissions").hasAuthority("POST /permissions")
                         .requestMatchers(HttpMethod.PUT, "/api/permissions/{id}").hasAuthority("PUT /permissions/{id}")
@@ -70,7 +70,7 @@ public class SecurityConfig {
                         .hasAuthority("DELETE /permissions/{id}")
                         .requestMatchers(HttpMethod.GET, "/api/permissions/{id}").hasAuthority("GET /permissions/{id}")
                         .requestMatchers(HttpMethod.GET, "/api/permissions").hasAuthority("GET /permissions")
-    
+
                         // Permisos para Role
                         .requestMatchers(HttpMethod.POST, "/api/roles").hasAuthority("POST /roles")
                         .requestMatchers(HttpMethod.PUT, "/api/roles/{id}").hasAuthority("PUT /roles/{id}")
@@ -83,17 +83,45 @@ public class SecurityConfig {
                         .hasAuthority("DELETE /roles/{roleId}/permissions/{permissionId}")
 
                         // Permisos para news
-                        .requestMatchers(HttpMethod.GET,"/api/news").permitAll()
-    
+                        .requestMatchers(HttpMethod.GET, "/api/news").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/news/{id}").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/news/add").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/api/news/{id}").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/api/news/{id}").permitAll()
+
+                        // Permisos para ad-space de portfolio
+
+                        .requestMatchers(HttpMethod.GET, "/api/ad-spaces").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/ad-spaces/{id}").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/ad-spaces").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/api/ad-spaces/{id}").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/api/ad-spaces/{id}").permitAll()
+
+                        // Permisos para ad-packages de portfolio
+
+                        .requestMatchers(HttpMethod.GET, "/api/ad-packages").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/ad-packages/{id}").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/ad-packages").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/api/ad-packages/{id}").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/api/ad-packages/{id}").permitAll()
+
+                        // Permisos para ad-sales de portfolio
+
+                        .requestMatchers(HttpMethod.GET, "/api/ad-sales").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/ad-sales/{id}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/ad-sales/user/{userId}").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/ad-sales").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/api/ad-sales/{id}").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/api/ad-sales/{id}").permitAll()
+
                         // Cualquier otra solicitud debe estar autenticada
-                        .anyRequest().authenticated()
-                )
+                        .anyRequest().authenticated())
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilter(new JwtAuthenticationFilter(authManager))
                 .addFilter(new JwtValidationFilter(authManager, permissionsCacheService))
                 .build();
-    }    
+    }
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {

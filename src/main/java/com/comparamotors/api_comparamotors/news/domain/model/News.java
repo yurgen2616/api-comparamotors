@@ -19,6 +19,10 @@ public class News {
 
     @Column(nullable = false)
     private String title;
+ 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private NewsTag tag;
 
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
@@ -32,8 +36,9 @@ public class News {
     @OneToMany(mappedBy = "news", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<NewsImage> images = new ArrayList<>();
 
-    public News(String title, String content, String redirectLink) {
+    public News(String title,NewsTag tag, String content, String redirectLink) {
         this.title = title;
+        this.tag = tag;
         this.content = content;
         this.redirectLink = redirectLink;
         this.publishedAt = LocalDateTime.now();
@@ -51,4 +56,5 @@ public class News {
         images.remove(image);
         image.setNews(null);
     }
+
 }

@@ -82,37 +82,34 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.DELETE, "/api/roles/{roleId}/permissions/{permissionId}")
                         .hasAuthority("DELETE /roles/{roleId}/permissions/{permissionId}")
 
-                        // Permisos para news
-                        .requestMatchers(HttpMethod.GET, "/api/news").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/news/{id}").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/news/add").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/api/news/{id}").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/api/news/{id}").permitAll()
+                        // Permisos para News
+                        .requestMatchers(HttpMethod.GET, "/api/news").hasAuthority("GET /news")
+                        .requestMatchers(HttpMethod.GET, "/api/news/{id}").hasAuthority("GET /news/{id}")
+                        .requestMatchers(HttpMethod.POST, "/api/news/add").hasAuthority("POST /news/add")
+                        .requestMatchers(HttpMethod.PUT, "/api/news/{id}").hasAuthority("PUT /news/{id}")
+                        .requestMatchers(HttpMethod.DELETE, "/api/news/{id}").hasAuthority("DELETE /news/{id}")
 
-                        // Permisos para ad-space de portfolio
+                        // Permisos para Ad Spaces
+                        .requestMatchers(HttpMethod.GET, "/api/ad-spaces").hasAuthority("GET /ad-spaces")
+                        .requestMatchers(HttpMethod.GET, "/api/ad-spaces/{id}").hasAuthority("GET /ad-spaces/{id}")
+                        .requestMatchers(HttpMethod.POST, "/api/ad-spaces").hasAuthority("POST /ad-spaces")
+                        .requestMatchers(HttpMethod.PUT, "/api/ad-spaces/{id}").hasAuthority("PUT /ad-spaces/{id}")
+                        .requestMatchers(HttpMethod.DELETE, "/api/ad-spaces/{id}").hasAuthority("DELETE /ad-spaces/{id}")
 
-                        .requestMatchers(HttpMethod.GET, "/api/ad-spaces").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/ad-spaces/{id}").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/ad-spaces").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/api/ad-spaces/{id}").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/api/ad-spaces/{id}").permitAll()
+                        // Permisos para Ad Packages
+                        .requestMatchers(HttpMethod.GET, "/api/ad-packages").hasAuthority("GET /ad-packages")
+                        .requestMatchers(HttpMethod.GET, "/api/ad-packages/{id}").hasAuthority("GET /ad-packages/{id}")
+                        .requestMatchers(HttpMethod.POST, "/api/ad-packages").hasAuthority("POST /ad-packages")
+                        .requestMatchers(HttpMethod.PUT, "/api/ad-packages/{id}").hasAuthority("PUT /ad-packages/{id}")
+                        .requestMatchers(HttpMethod.DELETE, "/api/ad-packages/{id}").hasAuthority("DELETE /ad-packages/{id}")
 
-                        // Permisos para ad-packages de portfolio
-
-                        .requestMatchers(HttpMethod.GET, "/api/ad-packages").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/ad-packages/{id}").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/ad-packages").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/api/ad-packages/{id}").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/api/ad-packages/{id}").permitAll()
-
-                        // Permisos para ad-sales de portfolio
-
-                        .requestMatchers(HttpMethod.GET, "/api/ad-sales").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/ad-sales/{id}").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/ad-sales/user/{userId}").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/ad-sales").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/api/ad-sales/{id}").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/api/ad-sales/{id}").permitAll()
+                        // Permisos para Ad Sales
+                        .requestMatchers(HttpMethod.GET, "/api/ad-sales").hasAuthority("GET /ad-sales")
+                        .requestMatchers(HttpMethod.GET, "/api/ad-sales/{id}").hasAuthority("GET /ad-sales/{id}")
+                        .requestMatchers(HttpMethod.GET, "/api/ad-sales/user/{userId}").hasAuthority("GET /ad-sales/user/{userId}")
+                        .requestMatchers(HttpMethod.POST, "/api/ad-sales").hasAuthority("POST /ad-sales")
+                        .requestMatchers(HttpMethod.PUT, "/api/ad-sales/{id}").hasAuthority("PUT /ad-sales/{id}")
+                        .requestMatchers(HttpMethod.DELETE, "/api/ad-sales/{id}").hasAuthority("DELETE /ad-sales/{id}")
 
                         // Cualquier otra solicitud debe estar autenticada
                         .anyRequest().authenticated())

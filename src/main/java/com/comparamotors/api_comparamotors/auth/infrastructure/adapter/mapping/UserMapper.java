@@ -24,6 +24,7 @@ public class UserMapper {
         User entity = new User();
         entity.setEmail(userRequestDTO.getEmail());
         entity.setPassword(userRequestDTO.getPassword());
+        entity.setUsername(userRequestDTO.getUsername());
         entity.setName(userRequestDTO.getName());
         entity.setLastName(userRequestDTO.getLastName());
         entity.setPhoneNumber(userRequestDTO.getPhoneNumber());
@@ -37,6 +38,7 @@ public class UserMapper {
         dto.setId(user.getId());
         dto.setEmail(user.getEmail());
         dto.setName(user.getName());
+        dto.setUsername(user.getUsername());
         dto.setLastName(user.getLastName());
         dto.setPhoneNumber(user.getPhoneNumber());
         dto.setCreatedAt(user.getCreatedAt());
@@ -74,6 +76,7 @@ public class UserMapper {
         
         user.setEmail(userRequestDTO.getEmail());
         user.setPassword(userRequestDTO.getPassword());
+        user.setUsername(userRequestDTO.getUsername());
         user.setName(userRequestDTO.getName());
         user.setLastName(userRequestDTO.getLastName());
         user.setPhoneNumber(userRequestDTO.getPhoneNumber());

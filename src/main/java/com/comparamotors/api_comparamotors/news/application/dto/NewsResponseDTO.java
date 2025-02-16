@@ -6,12 +6,16 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.comparamotors.api_comparamotors.news.domain.model.NewsTag;
+
+
 @Getter
 @Setter
 @Builder
 public class NewsResponseDTO {
     private Long id;
     private String title;
+    private NewsTag tag;
     private String content;
     private String redirectLink;
     private LocalDateTime publishedAt;

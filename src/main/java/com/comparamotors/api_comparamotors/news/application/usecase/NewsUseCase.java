@@ -28,7 +28,7 @@ public class NewsUseCase implements NewsService {
     @Transactional
     public NewsResponseDTO createNews(NewsRequestDTO newsRequest) {
         try {
-            News news = new News(newsRequest.getTitle(), newsRequest.getContent(), newsRequest.getRedirectLink());
+            News news = new News(newsRequest.getTitle(), newsRequest.getTag() ,newsRequest.getContent(), newsRequest.getRedirectLink());
             
             if (newsRequest.getImages() != null && !newsRequest.getImages().isEmpty()) {
                 for (MultipartFile file : newsRequest.getImages()) {
@@ -55,6 +55,7 @@ public class NewsUseCase implements NewsService {
                 .orElseThrow(() -> new NewsNotFoundException(id));
     
             news.setTitle(newsRequest.getTitle());
+            news.setTag(newsRequest.getTag());
             news.setContent(newsRequest.getContent());
             news.setRedirectLink(newsRequest.getRedirectLink());
     
@@ -122,6 +123,7 @@ public class NewsUseCase implements NewsService {
         return NewsResponseDTO.builder()
             .id(news.getId())
             .title(news.getTitle())
+            .tag(news.getTag())
             .content(news.getContent())
             .redirectLink(news.getRedirectLink())
             .publishedAt(news.getPublishedAt())

@@ -111,6 +111,10 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/api/ad-sales/{id}").hasAuthority("PUT /ad-sales/{id}")
                         .requestMatchers(HttpMethod.DELETE, "/api/ad-sales/{id}").hasAuthority("DELETE /ad-sales/{id}")
 
+                        // Permisos para Videos
+                        .requestMatchers(HttpMethod.GET, "/api/videos").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/videos/sync").hasAnyAuthority("POST /videos/sync")
+
                         // Cualquier otra solicitud debe estar autenticada
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session
@@ -124,8 +128,9 @@ public class SecurityConfig {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(Arrays.asList("http://localhost:4200")); // Ajusta según tus necesidades
-        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE"));
-        config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type"));
+        config.setAllowedHeaders(Arrays.asList("Authorization", "Content-Type", "X-Requested-With"));
+        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedOrigins(Arrays.asList("*"));
         config.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

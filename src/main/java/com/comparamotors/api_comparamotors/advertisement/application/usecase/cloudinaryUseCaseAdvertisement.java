@@ -1,12 +1,12 @@
-package com.comparamotors.api_comparamotors.news.application.usecase;
-
+package com.comparamotors.api_comparamotors.advertisement.application.usecase;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-import com.comparamotors.api_comparamotors.news.application.port.input.FileService;
+import com.comparamotors.api_comparamotors.advertisement.application.port.input.FileService;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
@@ -15,8 +15,7 @@ import java.util.Map;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class CloudinaryUseCase implements FileService {
-    
+public class cloudinaryUseCaseAdvertisement implements FileService{
     private final Cloudinary cloudinary;
 
     @Override
@@ -52,7 +51,7 @@ public class CloudinaryUseCase implements FileService {
     private String extractPublicIdFromUrl(String imageUrl) {
         String[] urlParts = imageUrl.split("/");
         String fileName = urlParts[urlParts.length - 1];
-        return "news/" + fileName.substring(0, fileName.lastIndexOf('.'));
+        return "advertisement/" + fileName.substring(0, fileName.lastIndexOf('.'));
     }
 
     @PostConstruct

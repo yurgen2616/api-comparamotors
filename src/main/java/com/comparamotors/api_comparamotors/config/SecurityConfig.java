@@ -48,6 +48,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authz -> authz
                         // Endpoints públicos
                         .requestMatchers("/api/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/users/register").permitAll()
 
                         // Permitir acceso a Swagger sin autenticación
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()

@@ -25,6 +25,8 @@ public class UserUseCase implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
 
+    private static final String DEFAULT_USER_ROLE = "ROLE_USER";
+
     @Override
     @Transactional
     public UserResponseDTO createUser(UserRequestDTO userDTO) {
@@ -39,6 +41,32 @@ public class UserUseCase implements UserService {
         user.setPassword((userDTO.getPassword()));
         user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         User savedUser = userRepository.save(user);
+        return userMapper.toDTO(savedUser);
+    }
+
+  @Override
+    @Transactional
+    public UserResponseDTO registerUser(UserRequestDTO userDTO) {
+        if (userRepository.existsByUsername(userDTO.getUsername())) {
+            throw new RuntimeException("Username already exists");
+        }
+        if (userRepository.existsByEmail(userDTO.getEmail())) {
+            throw new RuntimeException("Email already exists");
+        }
+
+        User user = userMapper.toEntity(userDTO);
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+        
+        // Guardar el usuario primero para obtener su ID
+        User savedUser = userRepository.save(user);
+        
+        // Obtener el rol de usuario por nombre y asignarlo
+        Role userRole = roleRepository.findByName(DEFAULT_USER_ROLE)
+                .orElseThrow(() -> new RuntimeException("Default user role not found"));
+        
+        savedUser.getRoles().add(userRole);
+        userRepository.save(savedUser);
+        
         return userMapper.toDTO(savedUser);
     }
 

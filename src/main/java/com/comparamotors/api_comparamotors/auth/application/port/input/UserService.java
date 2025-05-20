@@ -14,4 +14,5 @@ public interface UserService {
     List<UserResponseDTO> getAllUsers();
     void addRoleToUser(Long userId, Long roleId);
     void removeRoleFromUser(Long userId, Long roleId);
+    UserResponseDTO registerUser(UserRequestDTO user);
 }

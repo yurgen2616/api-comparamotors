@@ -1,5 +1,7 @@
 package com.comparamotors.api_comparamotors.news.domain.model;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,5 +25,24 @@ public class NewsImage {
 
     public NewsImage(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @Column(nullable = false)
+    private LocalDateTime updatedAt;
+
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
     }
 }

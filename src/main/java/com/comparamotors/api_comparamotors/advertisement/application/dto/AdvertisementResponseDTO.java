@@ -19,5 +19,7 @@ public class AdvertisementResponseDTO {
     private String content;
     private String redirectLink;
     private LocalDateTime publishedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     private List<AdvertisementImageDTO> images;
 }

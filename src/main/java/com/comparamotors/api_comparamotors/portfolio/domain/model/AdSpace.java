@@ -1,6 +1,7 @@
 package com.comparamotors.api_comparamotors.portfolio.domain.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -21,4 +22,23 @@ public class AdSpace {
     
     @Column(name = "monthly_cost", nullable = false)
     private BigDecimal monthlyCost;
+
+    
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @Column(nullable = false)
+    private LocalDateTime updatedAt;
+
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = LocalDateTime.now();
+    }
 }

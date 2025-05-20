@@ -10,25 +10,30 @@ import com.comparamotors.api_comparamotors.auth.domain.model.Permission;
 
 @Component
 public class PermissionMapper {
-    
+
     public PermissionDTO toDTO(Permission permission) {
-        if (permission == null) return null;
-        
+        if (permission == null)
+            return null;
+
         PermissionDTO dto = new PermissionDTO();
         dto.setId(permission.getId());
         dto.setName(permission.getName());
+        dto.setCreatedAt(permission.getCreatedAt());
+        dto.setUpdatedAt(permission.getUpdatedAt());
         dto.setDescription(permission.getDescription());
         return dto;
     }
 
     public Permission toDomain(Permission permission) {
-        if (permission == null) return null;
+        if (permission == null)
+            return null;
         return permission;
     }
 
     public Permission toDomain(PermissionDTO permissionDTO) {
-        if (permissionDTO == null) return null;
-        
+        if (permissionDTO == null)
+            return null;
+
         Permission permission = new Permission();
         permission.setId(permissionDTO.getId());
         permission.setName(permissionDTO.getName());
@@ -37,28 +42,32 @@ public class PermissionMapper {
     }
 
     public Permission toEntity(Permission permission) {
-        if (permission == null) return null;
+        if (permission == null)
+            return null;
         return permission;
     }
 
     public Set<PermissionDTO> toDTOSet(Set<Permission> permissions) {
-        if (permissions == null) return null;
+        if (permissions == null)
+            return null;
         return permissions.stream()
-            .map(this::toDTO)
-            .collect(Collectors.toSet());
+                .map(this::toDTO)
+                .collect(Collectors.toSet());
     }
 
     public List<Permission> toDomainList(List<Permission> permissions) {
-        if (permissions == null) return null;
+        if (permissions == null)
+            return null;
         return permissions.stream()
-            .map(this::toDomain)
-            .collect(Collectors.toList());
+                .map(this::toDomain)
+                .collect(Collectors.toList());
     }
 
     public List<PermissionDTO> toDTOList(List<Permission> permissions) {
-        if (permissions == null) return null;
+        if (permissions == null)
+            return null;
         return permissions.stream()
-            .map(this::toDTO)
-            .collect(Collectors.toList());
+                .map(this::toDTO)
+                .collect(Collectors.toList());
     }
 }

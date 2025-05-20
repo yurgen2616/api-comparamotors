@@ -25,6 +25,8 @@ public class RoleMapper {
         dto.setId(role.getId());
         dto.setName(role.getName());
         dto.setDescription(role.getDescription());
+        dto.setCreatedAt(role.getCreatedAt());
+        dto.setUpdatedAt(role.getUpdatedAt());
         if (role.getPermissions() != null) {
             dto.setPermissions(permissionMapper.toDTOSet(role.getPermissions()));
         }

@@ -19,5 +19,6 @@ public class NewsResponseDTO {
     private String content;
     private String redirectLink;
     private LocalDateTime publishedAt;
+    private LocalDateTime updatedAt;
     private List<NewsImageDTO> images;
 }
